@@ -27,6 +27,13 @@ class SnakePro:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                self.keydown_events(event)
+
+    def keydown_events(self, event):
+        """Respond when a key is pressed down."""
+        if event.key == pygame.K_q:
+            sys.exit()
 
 
 if __name__ == "__main__":
