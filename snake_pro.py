@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 
 import pygame
-from settings import Settings
 import sys
+from maze import Maze
+from settings import Settings
+
 
 class SnakePro:
     """Main class to call functions and execute all mechanics."""
@@ -10,8 +12,9 @@ class SnakePro:
         """Initialize game components"""
         pygame.init()
 
-        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode((1200, 800))
         self.settings = Settings()
+        self.border = Maze(self)
         pygame.display.set_caption("Snake Pro")
 
     def game_run(self):
@@ -19,6 +22,7 @@ class SnakePro:
         while True:
             self.game_events()
 
+            self.border.blitme()
             self.screen.fill(self.settings.bg_color)
             pygame.display.flip()
 
