@@ -12,6 +12,7 @@ class SnakePro:
         """Initialize game components"""
         pygame.init()
 
+        #self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.screen = pygame.display.set_mode((1200, 800))
         self.settings = Settings()
         self.border = Maze(self)
@@ -22,8 +23,8 @@ class SnakePro:
         while True:
             self.game_events()
 
-            self.border.blitme()
             self.screen.fill(self.settings.bg_color)
+            self.border.blitme()
             pygame.display.flip()
 
     def game_events(self):
