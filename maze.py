@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import pygame
 
 class Maze:
@@ -8,7 +10,7 @@ class Maze:
         self.screen = game_obj.screen
         self.screen_rect = game_obj.screen.get_rect()
 
-        self.image = pygame.image.load('images/maze1.png')
+        self.image = pygame.image.load('images/border.png')
         self.rect = self.image.get_rect()
 
         # Place border in the center of the screen
