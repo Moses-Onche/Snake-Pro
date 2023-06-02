@@ -29,6 +29,13 @@ class Snake:
         self.n_rect.center = ((self.h_rect.center[0], self.h_rect.center[1] + 8))
         self.b1_rect.center = ((self.n_rect.center[0], self.n_rect.center[1] + 8))
         self.b2_rect.center = ((self.b1_rect.center[0], self.b1_rect.center[1] + 8))
+        # Default body
+        self.body = [self.h_rect.center,
+                self.n_rect.center,
+                self.b1_rect.center,
+                self.b2_rect.center,
+                self.b1_rect.center,
+                self.b2_rect.center]
 
         # Define border limits for snake movement.
         border_width = 372
@@ -40,33 +47,25 @@ class Snake:
 
         # Movement parameters
         #self.move = 0
-        self.speed = 5
+        self.speed = 2
         self.p_angle = 90
         self.n_angle = self.p_angle - 90
 
-        self.m = 10
-        self.m_right = False
-        self.m_left = False
-        self.m_up = False
-        self.m_down = False
+        self.up = True
+        self.right = False
+        self.left = False
+        self.down = False
 
     def update_pos(self):
         """Implement snake's continuous movement."""
-        if self.h_rect.left > self.left_border:
-            self.h_rect.x -= self.speed
-        if self.h_rect.right < self.right_border:
-            self.h_rect.x += self.speed
-        if self.h_rect.top > self.top_border:
+        if self.up and self.h_rect.top > self.top_border:
             self.h_rect.y -= self.speed
-        if self.h_rect.bottom < self.bottom_border:
+        elif self.left and self.h_rect.left > self.left_border:
+            self.h_rect.x -= self.speed
+        elif self.right and self.h_rect.right < self.right_border:
+            self.h_rect.x += self.speed
+        elif self.down and self.h_rect.bottom < self.bottom_border:
             self.h_rect.y += self.speed
-
-    """
-    def change_dir(self):
-        Change the direction of movement of the snake.
-        if self.m_right:
-    """
-
 
     def blitme(self):
         """Draw the maze."""
