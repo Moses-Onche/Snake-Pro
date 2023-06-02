@@ -4,6 +4,7 @@ import pygame
 import random
 import sys
 import time
+from food import Food
 from maze import Maze
 from settings import Settings
 from snake import Snake
@@ -20,18 +21,18 @@ class SnakePro:
         self.settings = Settings()
         self.border = Maze(self)
         self.snake = Snake(self)
+        self.food = Food(self)
         self.fps = pygame.time.Clock()
 
         pygame.display.set_caption("Snake Pro")
 
     def game_loop(self):
         """Run function to execute all game loops."""
-        while True:
-            pygame.time.delay(50)
-            
+        while True:         
             self.flip_screen()
             self.game_events()
             self.snake.update_pos()
+            self.fps.tick(60)
 
     def game_events(self):
         """Respond to mouse and keyboard events."""
@@ -46,9 +47,10 @@ class SnakePro:
     def keydown_events(self, event):
         """Respond when a key is pressed down."""
         if event.key == pygame.K_q:
+            pygame.quit()
             sys.exit()
         if event.key == pygame.K_LEFT:
-            self.snake.m_left = True
+            self.snake.m = True
         if event.key == pygame.K_RIGHT:
             self.snake.m_right = True
         if event.key == pygame.K_UP:
@@ -59,19 +61,23 @@ class SnakePro:
     def keyup_events(self, event):
         """Respond when a key is released."""
         if event.key == pygame.K_LEFT:
-            self.snake.m_left = False
+            self.snake.up = False
+            self.snake.left = True
         if event.key == pygame.K_RIGHT:
-            self.snake.m_right = False
+            self.snake.up = False
+            self.snake.right = True
         if event.key == pygame.K_UP:
-            self.snake.m_up = False
+            self.snake.up = True
         if event.key == pygame.K_DOWN:
-            self.snake.m_down = False
+            self.snake.up = False
+            self.snake.down = True
 
     def flip_screen(self):
         """Flip screen as changes and events occur."""
         self.screen.fill(self.settings.bg_color)
         self.border.blitme()
         self.snake.blitme()
+        self.food.blitme()
         
         pygame.display.flip()
 
