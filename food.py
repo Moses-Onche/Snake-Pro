@@ -5,6 +5,7 @@ class Food:
     """Defines the food class."""
 
     def __init__(self, game_obj):
+        """Initialize the food parameters."""
         self.screen =  game_obj.screen
         self.screen_rect = self.screen.get_rect()
 
@@ -16,4 +17,5 @@ class Food:
         self.f_rect.center = (x, y)
 
     def blitme(self):
+        """Draw the food in the window."""
         self.screen.blit(self.f_image, self.f_rect)
