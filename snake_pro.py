@@ -32,7 +32,7 @@ class SnakePro:
             self.flip_screen()
             self.game_events()
             self.snake.update_pos()
-            self.fps.tick(60)
+            self.fps.tick(self.snake.speed)
 
     def game_events(self):
         """Respond to mouse and keyboard events."""
@@ -50,26 +50,23 @@ class SnakePro:
             pygame.quit()
             sys.exit()
         if event.key == pygame.K_LEFT:
-            self.snake.m = True
+            self.snake.move = "L"
         if event.key == pygame.K_RIGHT:
-            self.snake.m_right = True
+            self.snake.move = "R"
         if event.key == pygame.K_UP:
-            self.snake.m_up = True
+            self.snake.move = "U"
         if event.key == pygame.K_DOWN:
-            self.snake.m_down = True
+            self.snake.move = "D"
 
     def keyup_events(self, event):
         """Respond when a key is released."""
         if event.key == pygame.K_LEFT:
-            self.snake.up = False
             self.snake.left = True
         if event.key == pygame.K_RIGHT:
-            self.snake.up = False
             self.snake.right = True
         if event.key == pygame.K_UP:
             self.snake.up = True
         if event.key == pygame.K_DOWN:
-            self.snake.up = False
             self.snake.down = True
 
     def flip_screen(self):

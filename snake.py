@@ -26,9 +26,9 @@ class Snake:
         
         # Start snake at the center of the screen.
         self.h_rect.center = self.screen_rect.center
-        self.n_rect.center = ((self.h_rect.center[0], self.h_rect.center[1] + 8))
-        self.b1_rect.center = ((self.n_rect.center[0], self.n_rect.center[1] + 8))
-        self.b2_rect.center = ((self.b1_rect.center[0], self.b1_rect.center[1] + 8))
+        self.n_rect.center = ((self.h_rect.center[0], self.h_rect.center[1] + 15))
+        self.b1_rect.center = ((self.n_rect.center[0], self.n_rect.center[1] + 15))
+        self.b2_rect.center = ((self.b1_rect.center[0], self.b1_rect.center[1] + 15))
         # Default body
         self.body = [self.h_rect.center,
                 self.n_rect.center,
@@ -46,26 +46,33 @@ class Snake:
         self.bottom_border = self.h_rect.center[1] + border_height - 25
 
         # Movement parameters
-        #self.move = 0
-        self.speed = 2
+        self.speed = 10
         self.p_angle = 90
         self.n_angle = self.p_angle - 90
 
-        self.up = True
-        self.right = False
-        self.left = False
-        self.down = False
+        self.move = "U"
+        self.dir = self.move
 
     def update_pos(self):
         """Implement snake's continuous movement."""
-        if self.up and self.h_rect.top > self.top_border:
-            self.h_rect.y -= self.speed
-        elif self.left and self.h_rect.left > self.left_border:
-            self.h_rect.x -= self.speed
-        elif self.right and self.h_rect.right < self.right_border:
-            self.h_rect.x += self.speed
-        elif self.down and self.h_rect.bottom < self.bottom_border:
-            self.h_rect.y += self.speed
+        # Check if two opposite directions are not keyed in then assign direction.
+        if self.move == "U" and self.dir != "D":
+            self.dir = "U"
+            # Stop movement at border limit
+            if self.h_rect.top > self.top_border:
+                self.h_rect.y -= self.speed
+        if self.move == "L" and self.dir != "R":
+            self.dir = "L"
+            if self.h_rect.left > self.left_border:
+                self.h_rect.x -= self.speed
+        if self.move == "R" and self.dir != "L":
+            self.dir = "R"
+            if self.h_rect.right < self.right_border:
+                self.h_rect.x += self.speed
+        if self.move == "D" and self.dir != "U":
+            self.dir = "D"
+            if self.h_rect.bottom < self.bottom_border:
+                self.h_rect.y += self.speed
 
     def blitme(self):
         """Draw the maze."""
