@@ -10,6 +10,7 @@ class Snake:
         
         # Create head
         self.h_image = pygame.image.load('images/head.png')
+        self.snake = pygame.transform.rotate(self.h_image, 0)
         self.h_rect = self.h_image.get_rect()
 
         # Create neck
@@ -47,8 +48,7 @@ class Snake:
 
         # Movement parameters
         self.speed = 10
-        self.p_angle = 90
-        self.n_angle = self.p_angle - 90
+        self.p_angle = 0
 
         self.move = "U"
         self.dir = self.move
@@ -58,25 +58,28 @@ class Snake:
         # Check if two opposite directions are not keyed in then assign direction.
         if self.move == "U" and self.dir != "D":
             self.dir = "U"
-            # Stop movement at border limit
+            self.snake = pygame.transform.rotate(self.h_image, self.p_angle)
             if self.h_rect.top > self.top_border:
                 self.h_rect.y -= self.speed
         if self.move == "L" and self.dir != "R":
             self.dir = "L"
+            self.snake = pygame.transform.rotate(self.h_image, self.p_angle)
             if self.h_rect.left > self.left_border:
                 self.h_rect.x -= self.speed
         if self.move == "R" and self.dir != "L":
             self.dir = "R"
+            self.snake = pygame.transform.rotate(self.h_image, self.p_angle)
             if self.h_rect.right < self.right_border:
                 self.h_rect.x += self.speed
         if self.move == "D" and self.dir != "U":
             self.dir = "D"
+            self.snake = pygame.transform.rotate(self.h_image, self.p_angle)
             if self.h_rect.bottom < self.bottom_border:
                 self.h_rect.y += self.speed
 
     def blitme(self):
         """Draw the maze."""
-        self.screen.blit(self.h_image, self.h_rect)
+        self.screen.blit(self.snake, self.h_rect)
         self.screen.blit(self.n_image, self.n_rect)
         self.screen.blit(self.b1_image, self.b1_rect)
         self.screen.blit(self.b2_image, self.b2_rect)
