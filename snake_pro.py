@@ -16,8 +16,8 @@ class SnakePro:
         """Initialize game components"""
         pygame.init()
 
-        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-        #self.screen = pygame.display.set_mode((1200, 800))
+        #self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode((1200, 800))
         self.settings = Settings()
         self.border = Maze(self)
         self.snake = Snake(self)
