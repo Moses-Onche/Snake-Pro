@@ -16,6 +16,6 @@ class Maze:
         # Place border in the center of the screen
         self.rect.center = self.screen_rect.center
 
-    def blitme(self):
+    def blit(self):
         """Draw the maze."""
         self.screen.blit(self.image, self.rect)

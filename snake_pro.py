@@ -29,8 +29,9 @@ class SnakePro:
     def game_loop(self):
         """Run function to execute all game loops."""
         while True:         
-            self.flip_screen()
             self.game_events()
+            self.flip_screen()
+            self.eat_food()
             self.snake.update_pos()
             self.fps.tick(self.snake.speed)
 
@@ -41,46 +42,38 @@ class SnakePro:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 self.keydown_events(event)
-            #elif event.type == pygame.KEYUP:
-                #self.keyup_events(event)
 
     def keydown_events(self, event):
         """Respond when a key is pressed down."""
         if event.key == pygame.K_q:
             pygame.quit()
             sys.exit()
-        if event.key == pygame.K_LEFT:
+        if event.key == pygame.K_LEFT or event.key == pygame.K_a:
             self.snake.p_angle = 90
             self.snake.move = "L"
-        if event.key == pygame.K_RIGHT:
+        if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
             self.snake.p_angle = -90
             self.snake.move = "R"
-        if event.key == pygame.K_UP:
+        if event.key == pygame.K_UP or event.key == pygame.K_w:
             self.snake.p_angle = 0
             self.snake.move = "U"
-        if event.key == pygame.K_DOWN:
+        if event.key == pygame.K_DOWN or event.key == pygame.K_s:
             self.snake.p_angle = -180
             self.snake.move = "D"
 
-    """
-    def keyup_events(self, event):
-        Respond when a key is released.
-        if event.key == pygame.K_LEFT:
-            self.snake.left = True
-        if event.key == pygame.K_RIGHT:
-            self.snake.right = True
-        if event.key == pygame.K_UP:
-            self.snake.up = True
-        if event.key == pygame.K_DOWN:
-            self.snake.down = True
-    """
+    def eat_food(self):
+        """Control actions on eat."""
+        collision = self.snake.h_rect.colliderect(self.food.f_rect)
+        if collision:
+            #self.score.player_score += 10
+            self.food.f_rect.center = (random.randrange(350, 900), random.randrange(250, 500))
 
     def flip_screen(self):
         """Flip screen as changes and events occur."""
         self.screen.fill(self.settings.bg_color)
-        self.border.blitme()
-        self.snake.blitme()
-        self.food.blitme()
+        self.border.blit()
+        self.food.blit()
+        self.snake.blit()
         
         pygame.display.flip()
 
