@@ -68,7 +68,8 @@ class SnakePro:
         eat = self.snake.h_rect.colliderect(self.food.f_rect)
         if eat:
             self.score.player_score += 10
-            #self.score.scores()
+            if self.score.player_score % 50 == 0:
+                self.snake.speed += 1.5
             self.food.f_rect.center = (random.randrange(350, 900), random.randrange(250, 500))
 
     def flip_screen(self):
