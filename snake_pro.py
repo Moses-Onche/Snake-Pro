@@ -6,6 +6,7 @@ import sys
 import time
 from food import Food
 from maze import Maze
+from score import Score
 from settings import Settings
 from snake import Snake
 
@@ -22,6 +23,7 @@ class SnakePro:
         self.border = Maze(self)
         self.snake = Snake(self)
         self.food = Food(self)
+        self.score = Score(self)
         self.fps = pygame.time.Clock()
 
         pygame.display.set_caption("Snake Pro")
@@ -63,9 +65,10 @@ class SnakePro:
 
     def eat_food(self):
         """Control actions on eat."""
-        collision = self.snake.h_rect.colliderect(self.food.f_rect)
-        if collision:
-            #self.score.player_score += 10
+        eat = self.snake.h_rect.colliderect(self.food.f_rect)
+        if eat:
+            self.score.player_score += 10
+            #self.score.scores()
             self.food.f_rect.center = (random.randrange(350, 900), random.randrange(250, 500))
 
     def flip_screen(self):
@@ -74,6 +77,7 @@ class SnakePro:
         self.border.blit()
         self.food.blit()
         self.snake.blit()
+        self.score.blit()
         
         pygame.display.flip()
 

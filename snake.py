@@ -43,9 +43,6 @@ class Snake:
         #self.b2_rect = self.b1_rect
         if self.move == "U" and self.dir != "D":
             self.dir = "U"
-            #self.food.x = randrange(350, 900)
-            #self.food.y = randrange(250, 500)
-            #self.food.f_rect.center = (randrange(350, 900), randrange(250, 500))
             self.snake1 = pygame.transform.rotate(self.h_image, self.p_angle)
             if self.h_rect.top > self.top_border:
                 self.h_rect.y -= self.speed
