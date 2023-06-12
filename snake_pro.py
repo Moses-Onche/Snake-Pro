@@ -13,6 +13,7 @@ from snake import Snake
 
 class SnakePro:
     """Main class to call functions and execute all mechanics."""
+
     def __init__(self):
         """Initialize game components"""
         pygame.init()
@@ -64,7 +65,7 @@ class SnakePro:
             self.snake.move = "D"
 
     def eat_food(self):
-        """Control actions on eat."""
+        """Responses when it eats food."""
         eat = self.snake.h_rect.colliderect(self.food.f_rect)
         if eat:
             self.score.player_score += 10

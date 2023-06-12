@@ -6,7 +6,7 @@ class Maze:
     """Defines all the elements of the stage Maze."""
 
     def __init__(self, game_obj):
-        """Initialize the maze frame."""
+        """Initialize the maze and border parameters."""
         self.screen = game_obj.screen
         self.screen_rect = game_obj.screen.get_rect()
 
@@ -17,5 +17,5 @@ class Maze:
         self.rect.center = self.screen_rect.center
 
     def blit(self):
-        """Draw the maze."""
+        """Draw the border."""
         self.screen.blit(self.image, self.rect)
